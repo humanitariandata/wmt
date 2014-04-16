@@ -13,6 +13,7 @@
 		width:100%;
 		height:100%;
 		margin:0;
+		padding:0;
 		}
 		
 		#header {
@@ -25,9 +26,16 @@
 		#title {
 		  float:left;
 		}
-		
 		.twitter {
 			float:left;
+		}
+		
+		#iframe {
+			padding: 0;
+			margin: 0;
+			border:none;
+			width: 100%;
+			height: 720px;
 		}
 	</style>
 </head>
@@ -42,7 +50,7 @@
         <ul>
             <li><a href="#tab-1">Twitter</a></li>
             <li><a href="#tab-2">P2000 kaart</a></li>
-            <li><a href="#tab-3">Bron</a></li>
+            <li><a href="#tab-3">Kwetsbare locaties</a></li>
             <li><a href="#tab-4">Bron</a></li>
             <li><a href="#tab-5">Bron</a></li>
             <li><a href="#tab-6">Bron</a></li>
@@ -52,24 +60,24 @@
 
         <div id="tab-1">
         	<div class="twitter">
-          <a class="twitter-timeline" height="740" width="520" href="https://twitter.com/groteincidenten" data-widget-id="456383502380834816">Tweets by @groteincidenten</a>
+          <a class="twitter-timeline" height="720" width="520" href="https://twitter.com/groteincidenten" data-widget-id="456383502380834816">Tweets by @groteincidenten</a>
 		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.				id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 			</div>
             <div class="twitter">
-        <a class="twitter-timeline" height="740" width="520" href="https://twitter.com/NUnl" data-widget-id="456385128369901568">Tweets by @NUnl</a>
+        <a class="twitter-timeline" height="720" width="520" href="https://twitter.com/NUnl" data-widget-id="456385128369901568">Tweets by @NUnl</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
   			</div>
             <div class="twitter">
-            	<a class="twitter-timeline" height="740" width="520" href="https://twitter.com/RodeKruis" data-widget-id="456421807545778176">Tweets by @RodeKruis</a>
+            	<a class="twitter-timeline" height="720" width="520" href="https://twitter.com/RodeKruis" data-widget-id="456421807545778176">Tweets by @RodeKruis</a>
 				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);	js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             </div>
             <div style="clear:both;"></div>
         </div>
         <div id="tab-2">
-			<iframe id="iframe" src="http://p2000kaart.nl/" border="0" width="100%" height="740"></iframe>
+			<iframe id="iframe" src="http://p2000kaart.nl/"></iframe>
         </div>
       <div id="tab-3">
-            
+     		<iframe id="iframe" src="http://rodekruis.github.io/map/"></iframe>            
         </div>
         <div id="tab-4">
             
@@ -80,8 +88,11 @@
 
     </div>
 
-    <!--<p><button id="start-rotation">Start Rotation</button> <button id="stop-rotation">Stop Rotation</button> </p>-->
-
+    
+        <div id="navigation">
+    	<button id="start-rotation">Start rotatie</button> 
+    	<button id="stop-rotation">Stop Rotatie</button> 
+    	</div>
 
 
     <!-- jQuery with fallback to the 1.* for old IE -->
@@ -102,11 +113,18 @@
                 startCollapsed: 'accordion',
                 collapsible: 'accordion',
                 setHash: true,
-                disabled: [2,3,4,5,6,7],
+                disabled: [3,4,5,6,7],
 				rotationTime: 15000,
             });
 
             $('#horizontalTab').responsiveTabs('startRotation');
+			
+			$('#start-rotation').on('click', function() {
+                $('#horizontalTab').responsiveTabs('startRotation');
+            });
+            $('#stop-rotation').on('click', function() {
+                $('#horizontalTab').responsiveTabs('stopRotation');
+            });
         });
     </script>
 </body>
