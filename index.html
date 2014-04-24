@@ -29,8 +29,13 @@
 		.twitter {
 			float:left;
 		}
+
+		.twitter-timeline {
+			height: 720px;
+			width: 400px;
+		}
 		
-		#iframe {
+		iframe {
 			padding: 0;
 			margin: 0;
 			border:none;
@@ -54,21 +59,21 @@
             <li><a href="#tab-4">Kwetsbare locaties</a></li>
             <li><a href="#tab-5">Yammer</a></li>
             <li><a href="#tab-6">Weerkaart</a></li>
-            <li><a href="#tab-7">Wind</a></li>
-            <li><a href="#tab-8">Regen</a></li>
+            <li><a href="#tab-7">Weer</a></li>
+            <li><a href="#tab-8">..</a></li>
         </ul>
 
         <div id="tab-1">
         	<div class="twitter">
-          <a class="twitter-timeline" height="720" width="520" href="https://twitter.com/groteincidenten" data-widget-id="456383502380834816">Tweets by @groteincidenten</a>
+          <a class="twitter-timeline" href="https://twitter.com/groteincidenten" data-widget-id="456383502380834816">Tweets by @groteincidenten</a>
 		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.				id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 			</div>
             <div class="twitter">
-        <a class="twitter-timeline" height="720" width="520" href="https://twitter.com/NUnl" data-widget-id="456385128369901568">Tweets by @NUnl</a>
+        <a class="twitter-timeline"  href="https://twitter.com/NUnl" data-widget-id="456385128369901568">Tweets by @NUnl</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
   			</div>
             <div class="twitter">
-            	<a class="twitter-timeline" height="720" width="520" href="https://twitter.com/RodeKruis" data-widget-id="456421807545778176">Tweets by @RodeKruis</a>
+            	<a class="twitter-timeline" href="https://twitter.com/RodeKruis" data-widget-id="456421807545778176">Tweets by @RodeKruis</a>
 				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);	js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             </div>
             <div style="clear:both;"></div>
@@ -101,12 +106,10 @@
 	    <img src="http://www.knmi.nl/waarschuwingen_en_verwachtingen/images/weeralarm_info.gif" alt="Waarschuwing voor Extreem weer of Weeralarm!" title="Waarschuwing voor Extreem weer of Weeralarm!" border="0" width="220">
     </div>
         <div id="tab-7">
-            <iframe id="iframe" src="http://earth.nullschool.net/#current/wind/surface/level/orthographic=-350.53,51.13,3000"></iframe>
+            <iframe id="iframe" src="http://www.wunderground.com/cgi-bin/findweather/getForecast?brand=wxmap&query=52.500000,5.750000&zoom=7"></iframe>
         </div>
 
 <div id="tab-8">
-<iframe id="iframe" src="http://openweathermap.org/help/tiles.html?opacity=0.8&l=precipitation&lat=52&lon=6.65&zoom=7"></iframe>
-
 </div>
     
         <div id="navigation">
@@ -133,7 +136,7 @@
                 startCollapsed: 'accordion',
                 collapsible: 'accordion',
                 setHash: true,
-                disabled: [],
+                disabled: [7],
 				rotationTime: 15000,
             });
 
@@ -145,6 +148,26 @@
             $('#stop-rotation').on('click', function() {
                 $('#horizontalTab').responsiveTabs('stopRotation');
             });
+
+           if ($('.twitter-timeline').length) {
+    		//Timeline exists is it rendered ?
+   		 interval_timeline = false;
+    		interval_timeline = setInterval(function(){
+       		 console.log($('.twitter-timeline').width());
+       		 if ($('.twitter-timeline').hasClass('twitter-timeline-rendered')) {
+            		if ($('.twitter-timeline').width() > 10) {
+               		 //Callback
+                	clearInterval(interval_timeline);
+                	 $('.twitter-timeline').css('height', $(window).height()-200 + 'px');
+            	}     
+           }
+    	   },200);
+	   }
+	   
+	  
+           $('iframe').css('height', $(window).height()-200 + 'px');
+
+
         });
     </script>
 </body>
