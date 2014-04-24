@@ -130,7 +130,18 @@
 <script src="js/jquery.responsiveTabs.js" type="text/javascript"></script>
 
 <script type="text/javascript">
+	function getURLParameter(name) {
+  		return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null
+	}
+
         $(document).ready(function () {
+	    
+	    var rotate = getURLParameter('rotate');
+	    if(rotate == 1){
+		$('#horizontalTab').responsiveTabs('startRotation');
+	    }
+	
+
             $('#horizontalTab').responsiveTabs({
                 rotate: false,
                 startCollapsed: 'accordion',
@@ -140,9 +151,9 @@
 				rotationTime: 15000,
             });
 
-            $('#horizontalTab').responsiveTabs('startRotation');
+            
 			
-			$('#start-rotation').on('click', function() {
+	    $('#start-rotation').on('click', function() {
                 $('#horizontalTab').responsiveTabs('startRotation');
             });
             $('#stop-rotation').on('click', function() {
